@@ -21,9 +21,9 @@ export default defineComponent({
 
     const animateToTarget = () => {
       gsap.to(animatedNumber, {
-        duration: 2, // Duration of the animation in seconds
+        duration: 3, // Duration of the animation in seconds
         value: props.target,
-        ease: 'power2.out', // Easing function (gradually slows down)
+        ease: 'power4.out', // Easing function (gradually slows down)
         onUpdate: () => {
           // Ensure the number is updated smoothly
           animatedNumber.value = Math.round(animatedNumber.value);
