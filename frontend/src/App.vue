@@ -14,8 +14,8 @@ const navs: Nav[] = [
     icon: IconTooling
   },
   {
-    name: 'Production',
-    path: '/production',
+    name: 'Track',
+    path: '/track',
     icon: IconEcosystem
   },
   {

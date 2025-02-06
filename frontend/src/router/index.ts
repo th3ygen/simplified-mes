@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DashboardView from '@/views/DashboardView.vue'
-import ProductionView from '@/views/ProductionView.vue'
+import TrackView from '@/views/TrackView.vue'
 import QualityView from '@/views/QualityView.vue'
 
 const router = createRouter({
@@ -16,9 +16,9 @@ const router = createRouter({
       component: DashboardView,
     },
     {
-      path: '/production',
-      name: 'Production',
-      component: ProductionView,
+      path: '/track',
+      name: 'Track',
+      component: TrackView,
     },
     {
       path: '/quality',
