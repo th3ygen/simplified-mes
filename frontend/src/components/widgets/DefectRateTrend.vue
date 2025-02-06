@@ -15,7 +15,7 @@ const options = {
       fontSize: '16px',
       fontWeight: 400
     },
-    text: 'TARGET VS ACTUAL',
+    text: 'DEFECT RATE TREND',
   },
   dataLabels: {
     enabled: false
@@ -38,18 +38,15 @@ const options = {
   },
 } satisfies ApexOptions;
 
-const series = [{
-  name: "Target",
-  data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10],
-},
+const series = [
 {
   name: 'Actual',
-  data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+  data: [47, 17, 74, 29, 65, 68, 62, 77, 82, 16, 35, 27]
 }
 ] satisfies ApexSeries;
 </script>
 <template>
   <div class="w-full bg-white rounded border-[1px] border-gray-300 pt-4 px-4">
-    <apexchart width="100%" height="250" :options="options" :series="series"></apexchart>
+    <apexchart width="100%" height="270" :options="options" :series="series"></apexchart>
   </div>
 </template>

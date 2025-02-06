@@ -4,7 +4,7 @@ const machines = [
 	{
 		id: 1,
 		name: "Machine 1",
-		identifier: "#M0E1-001",
+		identifier: "M0E1-001",
 		utilizationRate: 0.5,
 		downtime: 1000 * 60 * 4.1, // 4.1 hours,
 		productionLineId: 1
@@ -12,7 +12,7 @@ const machines = [
 	{
 		id: 2,
 		name: "Machine 2",
-		identifier: "#M0E1-002",
+		identifier: "M0E1-002",
 		utilizationRate: 0.8,
 		downtime: 1000 * 60 * 10.51,
 		productionLineId: 1

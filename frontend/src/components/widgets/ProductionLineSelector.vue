@@ -23,10 +23,10 @@ function handleClick(index: number) {
 <template>
   <div class="flex gap-2">
     <div v-for="(option, index) in options" :key="option.name"
-      class="flex gap-2 items-center cursor-pointer bg-gray-100 border-[1px] text-gray-500 border-gray-300 px-4 py-1 rounded duration-300"
-      :class="{ 'bg-gray-50 border-lime-300 text-lime-500 border-b-4': option.checked, 'opacity-50 !cursor-not-allowed': !option.enabled }"
+      class="flex gap-2 items-center cursor-pointer border-b-4 bg-gray-100 border-[1px] text-gray-500 border-gray-300 px-4 py-1 rounded duration-300"
+      :class="{ 'bg-gray-50 border-lime-300 text-lime-600 border-b-4': option.checked, 'opacity-50 !cursor-not-allowed': !option.enabled }"
       @click="() => option.enabled && handleClick(index)">
-      {{ (option.checked && "Viewing " || "") + option.name }}
+      {{ option.name }}
     </div>
   </div>
 </template>

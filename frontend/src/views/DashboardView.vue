@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DefectRate from '@/components/widgets/DefectRate.vue';
+import EventLog from '@/components/widgets/EventLog.vue';
 import MachineUtilization from '@/components/widgets/MachineUtilization.vue';
 import NumberTrend from '@/components/widgets/NumberTrend.vue';
 import ProductionLineSelector from '@/components/widgets/ProductionLineSelector.vue';
@@ -10,26 +11,31 @@ const numberWidgets = [
     title: "Units produced",
     description: "Total units produced in total",
     unit: "unit(s)",
+    sub: "since last month"
   },
   {
     title: "Target vs actual",
     description: "Estimated total production vs actual production",
     unit: "unit(s)",
+    sub: "since last month"
   },
   {
     title: "Machine utilization",
     description: "Estimated average machine utilization",
     unit: "%",
+    sub: "since last month"
   },
   {
     title: "Defect rate",
     description: "Estimated average defect rate",
     unit: "%",
+    sub: "since last month"
   },
   {
     title: "OEE",
     description: "Overall equipment efficiency",
     unit: "%",
+    sub: "since last month"
   },
 ];
 
@@ -71,7 +77,7 @@ const productionLinesOptions = [
   <div class="grid gap-4">
     <div class="grid grid-cols-5 gap-4 w-full">
       <NumberTrend v-for="widget in numberWidgets" :key="widget.title" :title="widget.title"
-        :description="widget.description" :unit="widget.unit" />
+        :description="widget.description" :unit="widget.unit" :sub="widget.sub" />
     </div>
     <div class="flex justify-between">
       <div class="flex  gap-4 pt-2">
@@ -85,6 +91,9 @@ const productionLinesOptions = [
       </div>
       <MachineUtilization />
       <DefectRate />
+    </div>
+    <div class="w-full">
+      <EventLog />
     </div>
   </div>
 </template>

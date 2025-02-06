@@ -1,5 +1,3 @@
-// This is your Prisma schema file (schema.prisma)
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -44,59 +42,65 @@ enum QualityCheckStatus {
 model ProductionLine {
   id         Int                  @id @default(autoincrement())
   name       String
-  identifier String               @unique
+  identifier String               @unique @default(cuid())
   status     ProductionLineStatus @default(IDLE)
   createdAt  DateTime             @default(now())
   updatedAt  DateTime             @updatedAt
 
-  machines  Machine[]
-  orders    ProductionOrder[]
-  product   Product           @relation(fields: [productId], references: [id])
+  machines         Machine[]
+  productionOrders ProductionOrder[]
+  materials        Material[]
+
+  product   Product @relation(fields: [productId], references: [id])
   productId Int
 }
 
-model Machine {
-  id               Int            @id @default(autoincrement())
-  name             String
-  identifier       String         @unique
-  status           MachineStatus  @default(IDLE)
-  utilizationRate  Float
-  downtime         Float
-  productionLineId Int
+model ProductionOrder {
+  id             Int                   @id @default(autoincrement())
+  identifier     String                @unique @default(cuid())
+  targetQuantity Int?
+  actualQuantity Int?
+  startTime      DateTime
+  endTime        DateTime?
+  status         ProductionOrderStatus @default(PENDING)
+
+  qualityChecks QualityCheck[]
+
   productionLine   ProductionLine @relation(fields: [productionLineId], references: [id])
-  logs             MachineLog[]
+  productionLineId Int
 }
 
-model MachineLog {
+model Machine {
+  id              Int           @id @default(autoincrement())
+  name            String
+  identifier      String        @unique
+  status          MachineStatus @default(IDLE)
+  utilizationRate Float?
+  downtime        Float?
+
+  logs MachineLog[]
+
+  productionLine   ProductionLine @relation(fields: [productionLineId], references: [id])
+  productionLineId Int
+}
+
+model Material {
   id Int @id @default(autoincrement())
 
-  timestamp DateTime      @default(now())
-  status    MachineStatus @default(IDLE)
+  name  String
+  stock Float
+  unit  String
 
-  machine   Machine @relation(fields: [machineId], references: [id])
-  machineId Int
+  productionLines ProductionLine[]
 }
 
 model Product {
   id         Int     @id @default(autoincrement())
   name       String
-  identifier String  @unique
+  identifier String  @unique @default(cuid())
   image      String?
 
   productionLines ProductionLine[]
-}
-
-model ProductionOrder {
-  id             Int                   @id @default(autoincrement())
-  targetQuantity Int
-  actualQuantity Int
-  startTime      DateTime
-  endTime        DateTime?
-  status         ProductionOrderStatus @default(PENDING)
-
-  productionLine   ProductionLine @relation(fields: [productionLineId], references: [id])
-  productionLineId Int
-  qualityChecks    QualityCheck[]
 }
 
 model QualityCheck {
@@ -106,7 +110,8 @@ model QualityCheck {
   inspectionTime DateTime           @default(now())
   status         QualityCheckStatus
 
-  defects           Defect[]
+  defects Defect[]
+
   productionOrder   ProductionOrder @relation(fields: [productionOrderId], references: [id])
   productionOrderId Int
 }
@@ -127,4 +132,14 @@ model EventLog {
   type      String
   message   String
   timestamp DateTime @default(now())
+}
+
+model MachineLog {
+  id Int @id @default(autoincrement())
+
+  timestamp DateTime      @default(now())
+  status    MachineStatus @default(IDLE)
+
+  machine   Machine @relation(fields: [machineId], references: [id])
+  machineId Int
 }

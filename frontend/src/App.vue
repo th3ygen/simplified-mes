@@ -36,7 +36,7 @@ const navs: Nav[] = [
         </template>
       </SidebarComponent>
     </header>
-    <main class="mt-12 px-6 py-8 sm:px-10">
+    <main class="w-full mt-12 px-6 py-8 sm:px-10">
       <RouterView />
     </main>
   </main>

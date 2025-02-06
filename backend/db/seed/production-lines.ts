@@ -4,14 +4,14 @@ const productionLines = [
 	{
 		id: 1,
         name: "Line 1",
-		identifier: "#A001E1",
+		identifier: "PL-BB001",
 		status: "IDLE",
         productId: 1
 	},
 	{
 		id: 2,
         name: "Line 2",
-		identifier: "#A001E2",
+		identifier: "PL-BB002",
 		status: "IDLE",
         productId: 2
 	},

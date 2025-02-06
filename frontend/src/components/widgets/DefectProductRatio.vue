@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import type { ApexOptions } from 'apexcharts';
 import colors from 'tailwindcss/colors';
 
@@ -7,8 +8,7 @@ type ApexSeries = ApexOptions['series']
 const options = {
   chart: {
     height: 350,
-    type: "bar",
-    
+    type: "polarArea",
   },
   title: {
     style: {
@@ -16,44 +16,33 @@ const options = {
       fontSize: '16px',
       fontWeight: 400
     },
-    text: 'MACHINE UTILIZATION',
-  },
-  plotOptions: {
-    bar: {
-      horizontal: true,
-    }
-  },
-  fill: {
-    colors: [colors.lime[300]]
+    text: 'DEFECT PRODUCT RATIO',
   },
   dataLabels: {
     enabled: false
   },
-  stroke: {
-    curve: "smooth",
-    dashArray: [0, 5],
+  fill: {
+    colors: [colors.lime[300], colors.blue[400]]
   },
   tooltip: {
     enabled: false
   },
   legend: {
     show: false
-  },
-  xaxis: {
-    categories: ['Machine 1', 'Machine 2'],
-  },
-  yaxis: {
-    max: 100
   }
 } satisfies ApexOptions;
 
-const series = [{
-  data: [45, 22],
-},
-] satisfies ApexSeries;
+const series = [74, 23] satisfies ApexSeries;
 </script>
+
 <template>
-  <div class="w-full bg-white border-[1px] rounded border-gray-300 pt-4 px-4">
+  <div class="w-full h-full bg-white rounded border-[1px] border-gray-300 pt-4 px-4">
     <apexchart width="100%" height="250" :options="options" :series="series"></apexchart>
+
+    <!-- legends -->
+     <div class="w-full flex justify-center gap-4">
+      <div class="text-lime-400">Product 1</div>
+      <div class="text-blue-400">Product 2</div>
+     </div>
   </div>
 </template>

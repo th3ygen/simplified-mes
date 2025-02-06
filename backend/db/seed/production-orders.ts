@@ -3,6 +3,7 @@ import { ProductionOrder } from ".";
 const productionOrders = [
 	{
 		id: 1,
+		identifier: "PO-SB001",
 		targetQuantity: 1200,
 		actualQuantity: 1145,
 		startTime: new Date("2025-01-01"),
@@ -12,6 +13,7 @@ const productionOrders = [
 	},
 	{
 		id: 2,
+		identifier: "PO-SB002",
 		targetQuantity: 2200,
 		actualQuantity: 2102,
 		startTime: new Date("2025-02-02"),
@@ -21,6 +23,7 @@ const productionOrders = [
 	},
 	{
 		id: 3,
+		identifier: "PO-SB003",
 		targetQuantity: 1200,
 		actualQuantity: 201,
 		startTime: new Date("2025-03-04"),
@@ -29,6 +32,7 @@ const productionOrders = [
 	},
 	{
 		id: 4,
+		identifier: "PO-SB004",
 		targetQuantity: 2400,
 		actualQuantity: 0,
 		startTime: new Date("2025-03-10"),

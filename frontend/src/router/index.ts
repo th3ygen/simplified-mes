@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DashboardView from '@/views/DashboardView.vue'
 import TrackView from '@/views/TrackView.vue'
-import QualityView from '@/views/QualityView.vue'
+import QualityControlView from '@/views/QualityControlView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,8 +22,8 @@ const router = createRouter({
     },
     {
       path: '/quality',
-      name: 'Quality',
-      component: QualityView,
+      name: 'Quality Control',
+      component: QualityControlView,
     },
   ],
 })

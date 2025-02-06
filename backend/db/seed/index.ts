@@ -1,11 +1,11 @@
 import type { Prisma } from "@prisma/client";
 import prisma from "../client";
-import productionLines from "./line";
-import productionOrders from "./order";
+import productionLines from "./production-lines";
+import productionOrders from "./production-orders";
 import products from "./products";
-import machines from "./machine";
-import qualityChecks from "./quality";
-import defects from "./defect";
+import machines from "./machines";
+import qualityChecks from "./quality-checks";
+import defects from "./defects";
 
 export type ProductionLine = Prisma.ProductionLineCreateManyInput;
 export type ProductionOrder = Prisma.ProductionOrderCreateManyInput;
@@ -20,9 +20,9 @@ async function begin() {
 			prisma.product.createMany({
 				data: products,
 			}),
-            prisma.productionLine.createMany({
-                data: productionLines,
-            }),
+			prisma.productionLine.createMany({
+				data: productionLines,
+			}),
 			prisma.machine.createMany({
 				data: machines,
 			}),

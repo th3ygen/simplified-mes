@@ -12,7 +12,7 @@ const options = {
   },
   title: {
     style: {
-      color: colors.lime[400],
+      color: colors.lime[500],
       fontSize: '16px',
       fontWeight: 400
     },
@@ -20,6 +20,9 @@ const options = {
   },
   dataLabels: {
     enabled: false
+  },
+  fill: {
+    colors: [colors.lime[300]]
   },
   stroke: {
     curve: "smooth",
@@ -45,7 +48,7 @@ const series = [{
 ] satisfies ApexSeries;
 </script>
 <template>
-  <div class="w-full bg-white border-[1px] border-gray-300 pt-4 px-4">
+  <div class="w-full bg-white border-[1px] rounded border-gray-300 pt-4 px-4">
     <apexchart width="100%" height="250" :options="options" :series="series"></apexchart>
   </div>
 </template>

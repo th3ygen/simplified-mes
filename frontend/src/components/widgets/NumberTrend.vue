@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import AnimatedNumber from '../motion/AnimatedNumber.vue';
 import colors from 'tailwindcss/colors'
 
-defineProps<{ title: string; description: string; unit: string }>();
+defineProps<{ title: string; description: string; unit: string, sub: string }>();
 
 const chartOptions = ref<ApexOptions>({
   chart: {
@@ -47,9 +47,10 @@ const series = ref([
     </h2>
     <apexchart type="area" width="100%" height="100" :options="chartOptions" :series="series"></apexchart>
     <div
-      class="absolute left-0 top-0 pt-6 w-full h-full flex items-center justify-center text-lime-700 font-bold text-5xl">
-      <div class="flex items-end gap-2">
+      class="absolute left-0 top-0 pt-8 w-full h-full flex items-center justify-center text-lime-700 font-bold text-5xl">
+      <div class="flex flex-col items-center gap-2">
         <AnimatedNumber :target="1337" />
+        <div class="text-xs text-lime-500 font-light">{{ sub || "" }}</div>
       </div>
     </div>
   </div>
