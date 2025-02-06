@@ -5,12 +5,13 @@ import { addResolversToSchema } from "@graphql-tools/schema";
 export async function init() {
 	const schema = await typeDefs.load();
 
-	const re = {
-		Date: resolvers.Date,
-		Query: { ...resolvers.machineResolvers },
-	};
-
-	return addResolversToSchema({ schema, resolvers: re });
+	return addResolversToSchema({
+		schema,
+		resolvers: {
+			Date: resolvers.Date,
+			Query: { ...resolvers.machineResolvers, ...resolvers.productionOrderResolvers },
+		},
+	});
 }
 
 export { resolvers, typeDefs };

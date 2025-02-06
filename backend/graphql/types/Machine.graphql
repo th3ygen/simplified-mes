@@ -9,8 +9,7 @@ enum MachineStatus {
 
 type Machine {
 	id: ID!
+	identifier: String!
 	name: String!
 	status: MachineStatus!
-	created_at: Date!
-	updated_at: Date
 }

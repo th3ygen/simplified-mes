@@ -1,0 +1,23 @@
+#import Machine from './Machine.graphql'
+scalar Date
+
+enum ProductionOrderStatus {
+	PENDING
+	FAILED
+	COMPLETED
+	CANCELLED
+}
+
+type ProductionOrder {
+	id: ID!
+	identifier: String!
+	targetQuantity: Int!
+	actualQuantity: Int!
+	startTime: Date!
+	endTime: Date
+	status: ProductionOrderStatus!
+}
+
+type Mutation {
+	createProductionOrder(product: String!, target: Int!, startDate: Date): ProductionOrder
+}

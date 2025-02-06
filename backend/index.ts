@@ -1,11 +1,14 @@
 import express from "express";
 import { createHandler } from "graphql-http/lib/use/express";
 import * as graphql from "./graphql";
+import cors from 'cors';
 
 async function init() {
 	const app = express();
 
 	const schema = await graphql.init();
+
+	app.use(cors());
 
 	app.use(
 		"/graphql",

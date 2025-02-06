@@ -2,8 +2,14 @@
 #import Material from './material.graphql'
 #import Machine from './Machine.graphql'
 #import QCInspection from './QCInspection.graphql'
+#import ProductionOrder from './ProductionOrder.graphql'
+
+scalar Date
 
 type Query {
+	productionOrder(id: ID!): ProductionOrder
+	productionOrders: [ProductionOrder]
+
 	production(id: ID!): Production
 	productions: [Production]
 
@@ -15,4 +21,5 @@ type Query {
 
 	qcInspection(id: ID!): QCInspection
 	qcInspections: [QCInspection]
+	createProductionOrder(product: String!, target: Int!, startDate: Date): ProductionOrder
 }

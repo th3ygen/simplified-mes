@@ -6,6 +6,9 @@ import type { Nav } from './components/SidebarComponent.vue';
 import IconEcosystem from './components/icons/IconEcosystem.vue';
 import IconDocumentation from './components/icons/IconDocumentation.vue';
 import IconTooling from './components/icons/IconTooling.vue';
+import { useQuery } from '@vue/apollo-composable'
+import gql from 'graphql-tag';
+import { watch } from 'vue';
 
 const navs: Nav[] = [
   {
@@ -24,6 +27,19 @@ const navs: Nav[] = [
     icon: IconDocumentation
   }
 ]
+
+const { result } = useQuery(gql`
+  query getMachines {
+    machines {
+      id
+      name
+    }
+  }
+`)
+
+watch(result, () => {
+  console.log(result)
+})
 
 </script>
 
