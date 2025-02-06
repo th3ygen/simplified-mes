@@ -1,0 +1,16 @@
+scalar Date
+
+enum MachineStatus {
+	IDLE
+	ACTIVE
+	MAINTENANCE
+	DOWN
+}
+
+type Machine {
+	id: ID!
+	name: String!
+	status: MachineStatus!
+	created_at: Date!
+	updated_at: Date
+}

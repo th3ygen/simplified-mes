@@ -1,0 +1,18 @@
+#import Production from './Production.graphql'
+#import Material from './material.graphql'
+#import Machine from './Machine.graphql'
+#import QCInspection from './QCInspection.graphql'
+
+type Query {
+	production(id: ID!): Production
+	productions: [Production]
+
+	machine(id: ID!): Machine
+	machines: [Machine]
+
+	material(id: ID!): Material
+	materials: [Material]
+
+	qcInspection(id: ID!): QCInspection
+	qcInspections: [QCInspection]
+}

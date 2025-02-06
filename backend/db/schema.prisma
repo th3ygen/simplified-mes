@@ -1,0 +1,130 @@
+// This is your Prisma schema file (schema.prisma)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Or your chosen database provider
+  url      = env("DATABASE_URL") // Make sure to set this environment variable
+}
+
+enum ProductionLineStatus {
+  IDLE
+  RUNNING
+  PAUSED
+  DOWN
+}
+
+enum ProductionOrderStatus {
+  PENDING
+  PROGRESS
+  FAILED
+  DONE
+}
+
+enum MachineStatus {
+  IDLE
+  ACTIVE
+  MAINTENANCE
+  DOWN
+}
+
+enum DefectSeverity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum QualityCheckStatus {
+  PASS
+  FAIL
+}
+
+model ProductionLine {
+  id         Int                  @id @default(autoincrement())
+  name       String
+  identifier String               @unique
+  status     ProductionLineStatus @default(IDLE)
+  createdAt  DateTime             @default(now())
+  updatedAt  DateTime             @updatedAt
+
+  machines  Machine[]
+  orders    ProductionOrder[]
+  product   Product           @relation(fields: [productId], references: [id])
+  productId Int
+}
+
+model Machine {
+  id               Int            @id @default(autoincrement())
+  name             String
+  identifier       String         @unique
+  status           MachineStatus  @default(IDLE)
+  utilizationRate  Float
+  downtime         Float
+  productionLineId Int
+  productionLine   ProductionLine @relation(fields: [productionLineId], references: [id])
+  logs             MachineLog[]
+}
+
+model MachineLog {
+  id Int @id @default(autoincrement())
+
+  timestamp DateTime      @default(now())
+  status    MachineStatus @default(IDLE)
+
+  machine   Machine @relation(fields: [machineId], references: [id])
+  machineId Int
+}
+
+model Product {
+  id         Int     @id @default(autoincrement())
+  name       String
+  identifier String  @unique
+  image      String?
+
+  productionLines ProductionLine[]
+}
+
+model ProductionOrder {
+  id             Int                   @id @default(autoincrement())
+  targetQuantity Int
+  actualQuantity Int
+  startTime      DateTime
+  endTime        DateTime?
+  status         ProductionOrderStatus @default(PENDING)
+
+  productionLine   ProductionLine @relation(fields: [productionLineId], references: [id])
+  productionLineId Int
+  qualityChecks    QualityCheck[]
+}
+
+model QualityCheck {
+  id Int @id @default(autoincrement())
+
+  inspectorName  String
+  inspectionTime DateTime           @default(now())
+  status         QualityCheckStatus
+
+  defects           Defect[]
+  productionOrder   ProductionOrder @relation(fields: [productionOrderId], references: [id])
+  productionOrderId Int
+}
+
+model Defect {
+  id          Int            @id @default(autoincrement())
+  type        String
+  description String
+  severity    DefectSeverity @default(LOW)
+  timestamp   DateTime       @default(now())
+
+  qualityCheck   QualityCheck @relation(fields: [qualityCheckId], references: [id])
+  qualityCheckId Int
+}
+
+model EventLog {
+  id        Int      @id @default(autoincrement())
+  type      String
+  message   String
+  timestamp DateTime @default(now())
+}

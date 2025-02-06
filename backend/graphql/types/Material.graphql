@@ -1,0 +1,9 @@
+scalar Date
+
+type Material {
+	id: ID!
+	name: String!
+	stock: Int!
+	created_at: Date!
+	updated_at: Date
+}

@@ -1,0 +1,21 @@
+#import Machine from './Machine.graphql'
+scalar Date
+
+enum ProductionStatus {
+	PENDING
+	FAILED
+	COMPLETED
+	CANCELLED
+}
+
+type Production {
+	id: ID!
+	product_name: String!
+	quantity: Int!
+	start_time: Date!
+	end_time: Date
+	status: ProductionStatus!
+	machine: Machine!
+	created_at: Date!
+	updated_at: Date
+}

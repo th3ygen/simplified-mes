@@ -1,0 +1,20 @@
+#import Production from './Production.graphql'
+
+scalar Date
+
+enum QCInspectionResult {
+	PENDIUNG
+	PASSED
+	FAILED
+	CANCELLED
+}
+
+type QCInspection {
+	id: ID!
+	production: Production!
+	inspection_time: Date!
+	inspector_name: String!
+	result: QCInspectionResult!
+	created_at: Date!
+	updated_at: Date
+}
